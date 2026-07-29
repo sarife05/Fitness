@@ -1,0 +1,34 @@
+extends layout
+
+block content
+  h1 Workout Volume Calculator
+  p Enter your workout details below to calculate your training load.
+
+  form(action="/calculate-workout" method="POST")
+    label(for="exercise") Exercise Name
+    input(type="text" id="exercise" name="exercise" placeholder="e.g. Press" required)
+
+    label(for="sets") Sets
+    input(type="number" id="sets" name="sets" placeholder="e.g. 9" required)
+
+    label(for="reps") Repetitions
+    input(type="number" id="reps" name="reps" placeholder="e.g. 10" required)
+
+    label(for="weight") Weight Used (kg)
+    input(type="number" id="weight" name="weight" placeholder="e.g. 21" required)
+
+    label(for="duration") Session Duration (minutes)
+    input(type="number" id="duration" name="duration" placeholder="e.g. 67" step="0.01" required)
+
+    button(type="submit") Calculate
+
+  if error
+    p.error= error
+
+  if result
+    .result
+      h2 Workout Summary
+      p Exercise: #{result.exercise}
+      p Total Volume: #{result.totalVolume} kg
+      p Volume per Minute: #{result.volumePerMinute} kg/min
+      p Load Category: #{result.loadCategory}
