@@ -11,8 +11,8 @@ function calculateWorkout(req, res) {
         if (durationNum < minMinutes) {
             errors.push(`Duration is too short for ${totalReps} total reps. Minimum realistic duration is about ${minMinutes.toFixed(1)} minutes.`);
         }
-        if (weightNum > 500) errors.push('Weight value seems unrealistic (over 500 kg). Please check your input.');
-        if (repsNum > 100) errors.push('Repetitions value seems unrealistic (over 100 per set). Please check your input.');
+        if (weightNum > 500) errors.push('Weight value seems unrealistic. Please check your input.');
+        if (repsNum > 100) errors.push('Repetitions value seems unrealistic. Please check your input.');
     }
 
     if (errors.length > 0) {
