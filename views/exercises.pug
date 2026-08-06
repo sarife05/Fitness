@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h1 Exercise Library
+  p Search the wger exercise database for movements to add to your training plan.
+
+  form#exercise-search-form
+    label(for='exercise-term') Exercise name
+    input(type='text' id='exercise-term' name='term' placeholder='e.g. squat, bench press, plank' required)
+    button(type='submit') Search
+
+  #exercise-status.status
+  #exercise-results.card-grid
+
+  script(src='/javascripts/exercises.js')

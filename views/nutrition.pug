@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h1 Food &amp; Nutrition
+  p Search Open Food Facts for a food or product to see its macros per 100g.
+
+  form#nutrition-search-form
+    label(for='food-term') Food or product name
+    input(type='text' id='food-term' name='term' placeholder='e.g. banana, oat milk, chicken breast' required)
+    button(type='submit') Search
+
+  #nutrition-status.status
+  #nutrition-results.card-grid
+
+  script(src='/javascripts/nutrition.js')

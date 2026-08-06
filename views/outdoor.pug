@@ -1,0 +1,33 @@
+extends layout
+
+block content
+  h1 Outdoor Training &amp; Nearby Facilities
+  p Enter a city to get current weather, an outdoor-training recommendation, and nearby sports facilities on a map.
+
+  form#outdoor-search-form
+    label(for='city-term') City
+    input(type='text' id='city-term' name='city' placeholder='e.g. Astana, Almaty, London' required)
+    button(type='submit') Check conditions
+
+  #outdoor-status.status
+
+  #outdoor-weather.result(hidden)
+    h2 Weather in <span id='outdoor-location-name'></span>
+    p#outdoor-recommendation-summary
+    ul#outdoor-recommendation-reasons
+    dl.weather-grid
+      dt Temperature
+      dd#outdoor-temp
+      dt Feels like
+      dd#outdoor-feels-like
+      dt Condition
+      dd#outdoor-condition
+      dt Humidity
+      dd#outdoor-humidity
+      dt Wind speed
+      dd#outdoor-wind
+
+  #outdoor-map(style='height: 360px; margin-top: 20px; border-radius: 10px;' hidden)
+  #outdoor-facilities-list.card-grid
+
+  script(src='/javascripts/outdoor.js')
