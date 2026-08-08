@@ -1,0 +1,57 @@
+extends layout
+
+block content
+    h1 Exercise Management
+
+    button#newBtn Add Exercise
+
+    br
+    br
+
+    table(border="1" width="100%")
+        thead
+            tr
+                th Name
+                th Muscle Group
+                th Equipment
+                th Actions
+        tbody#exerciseTable
+
+    hr
+
+    h2 Add / Edit Exercise
+
+    form#exerciseForm
+        input(type="hidden" id="exerciseId")
+
+        p Name
+        input(type="text" id="name" required)
+
+        p Muscle Group
+        select(id="muscleGroup")
+            option(value="chest") Chest
+            option(value="back") Back
+            option(value="shoulders") Shoulders
+            option(value="arms") Arms
+            option(value="legs") Legs
+            option(value="core") Core
+            option(value="full_body") Full Body
+            option(value="cardio") Cardio
+
+        p Equipment
+        select(id="equipment")
+            option(value="bodyweight") Bodyweight
+            option(value="dumbbell") Dumbbell
+            option(value="barbell") Barbell
+            option(value="kettlebell") Kettlebell
+            option(value="machine") Machine
+            option(value="cable") Cable
+            option(value="resistance_band") Resistance Band
+            option(value="other") Other
+
+        br
+        br
+
+        button(type="submit") Save Exercise
+
+script(src="/javascripts/manageExercises.js")

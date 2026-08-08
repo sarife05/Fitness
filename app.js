@@ -1,5 +1,4 @@
 require('dotenv').config();
-require('dotenv').config();
 
 const connectDB = require('./config/db');
 connectDB();
@@ -15,20 +14,8 @@ var usersRouter = require('./routes/users');
 var exercisesRouter = require('./routes/exercises');
 var nutritionRouter = require('./routes/nutrition');
 var outdoorRouter = require('./routes/outdoor');
-
-var app = express();
-
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var exercisesRouter = require('./routes/exercises');
-var nutritionRouter = require('./routes/nutrition');
-var outdoorRouter = require('./routes/outdoor');
+var workoutsRouter = require('./routes/workouts');
+var progressRouter = require('./routes/progress');
 
 var app = express();
 
@@ -47,6 +34,8 @@ app.use('/users', usersRouter);
 app.use('/', exercisesRouter);
 app.use('/', nutritionRouter);
 app.use('/', outdoorRouter);
+app.use('/', workoutsRouter);
+app.use('/', progressRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,0 +1,37 @@
+extends layout
+
+block content
+    h1 Workout Manager
+
+    h2 Add / Edit Workout
+
+    form#workoutForm
+        input(type="hidden" id="workoutId")
+
+        p Date
+        input(type="date" id="date" required)
+
+        p Duration (minutes)
+        input(type="number" id="duration" required)
+
+        p Notes
+        textarea(id="notes")
+
+        br
+        button(type="submit") Save Workout
+
+    hr
+
+    h2 Workout List
+
+    table(border="1" width="100%")
+        thead
+            tr
+                th Date
+                th Duration
+                th Notes
+                th Actions
+
+        tbody#workoutTable
+
+    script(src="/javascripts/workouts.js")

@@ -54,3 +54,127 @@ document.addEventListener('DOMContentLoaded', () => {
         return div.innerHTML;
     }
 });
+
+// ======================
+// MY EXERCISES CRUD
+// ======================
+
+const crudTable = document.getElementById("crudExercises");
+
+if (crudTable) {
+    loadCrudExercises();
+}
+
+async function loadCrudExercises() {
+
+    const response = await fetch("/api/exercises");
+    const data = await response.json();
+
+    crudTable.innerHTML = "";
+
+    data.exercises.forEach(ex => {
+
+        crudTable.innerHTML += `
+        <tr>
+
+            <td>${ex.name}</td>
+
+            <td>${ex.muscleGroup}</td>
+
+            <td>${ex.equipment}</td>
+
+            <td>
+
+                <button onclick="editCrudExercise('${ex._id}')">
+                    Edit
+                </button>
+
+                <button onclick="deleteCrudExercise('${ex._id}')">
+                    Delete
+                </button>
+
+            </td>
+
+        </tr>
+        `;
+
+    });
+
+}
+
+const crudForm = document.getElementById("crudExerciseForm");
+
+if (crudForm) {
+
+    crudForm.addEventListener("submit", async function(e){
+
+        e.preventDefault();
+
+        const id=document.getElementById("crudId").value;
+
+        const body={
+
+            name:document.getElementById("crudName").value,
+
+            muscleGroup:document.getElementById("crudMuscle").value,
+
+            equipment:document.getElementById("crudEquipment").value
+
+        };
+
+        if(id){
+
+            await fetch("/api/exercises/"+id,{
+                method:"PUT",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify(body)
+            });
+
+        }else{
+
+            await fetch("/api/exercises",{
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify(body)
+            });
+
+        }
+
+        this.reset();
+
+        document.getElementById("crudId").value="";
+
+        loadCrudExercises();
+
+    });
+
+}
+
+async function editCrudExercise(id){
+
+    const response=await fetch("/api/exercises/"+id);
+
+    const data=await response.json();
+
+    document.getElementById("crudId").value=data.exercise._id;
+    document.getElementById("crudName").value=data.exercise.name;
+    document.getElementById("crudMuscle").value=data.exercise.muscleGroup;
+    document.getElementById("crudEquipment").value=data.exercise.equipment;
+
+}
+
+async function deleteCrudExercise(id){
+
+    if(!confirm("Delete?")) return;
+
+    await fetch("/api/exercises/"+id,{
+        method:"DELETE"
+    });
+
+    loadCrudExercises();
+
+}
